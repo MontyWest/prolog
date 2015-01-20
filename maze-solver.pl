@@ -20,4 +20,4 @@ solve([X0,Y0], [Xn,Yn], Path) :-
 	solve([X0, Y0], [Xn, Yn], OPath),
 	length(Path, A),
 	length(OPath, B),
-	A <= B.
+	(A <= B).
