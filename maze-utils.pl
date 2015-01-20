@@ -3,4 +3,5 @@
 reverse([], []).
 reverse([H|T], RevList):-
 	reverse(T, RevT),
-	conc(RevT, [H], RevList).
+	append(RevT, [H], RevList).
+
