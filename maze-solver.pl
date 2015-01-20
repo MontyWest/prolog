@@ -20,6 +20,19 @@ adj_tile([X0,Y0], [X1,Y0]) :-
 	(X1 is X0+1); (X1 is X0-1).
 
 solve(X, Y, Path) :-
+	endpoints_valid(X, Y, Path),
+	solve_rec(X, Y, Path),
+	\+ is_shorter_path(X, Y, Path).
+
+is_shorter_path(X, Y, Path) :-
+	solve_rec(X, Y, OPath),
+	length(OPath, N),
+	length(Path, M),
+	(N < M),
+	!.
+
+endpoints_valid(X, Y, Path) :-
 	Path = [X|_],
 	reverse(Path, RevPath),
 	RevPath = [Y,_].
+
