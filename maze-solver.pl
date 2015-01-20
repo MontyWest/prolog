@@ -25,7 +25,8 @@ solve(X, Y, Path) :-
 	\+ exists_shorter_path(X, Y, Path).
 
 exists_shorter_path(X, Y, Path) :-
-	solve_rec(X, Y, OPath),
+	endpoints_valid(X, Y, Path),
+	valid_path(X, Y, OPath),
 	length(OPath, N),
 	length(Path, M),
 	(N < M),
