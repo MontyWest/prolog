@@ -33,6 +33,4 @@ is_shorter_path(X, Y, Path) :-
 
 endpoints_valid(X, Y, Path) :-
 	Path = [X|_],
-	reverse(Path, RevPath),
-	RevPath = [Y,_].
-
+	reverse(Path, [Y|_]).
