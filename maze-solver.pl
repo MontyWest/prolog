@@ -9,10 +9,10 @@ available_move([X0,Y0], [X1,Y1]) :-
 
 outside(X1,Y1) :- 
 	mazeSize(A,B), 
-	(X1<1), 
-	(X1>A), 
-	(Y1<1), 
-	(Y1>B).
+	((X1<1);
+	(X1>A); 
+	(Y1<1); 
+	(Y1>B)).
 
 adj_tile([X0,Y0], [X0,Y1]) :- 
 	(Y1 is Y0+1); (Y1 is Y0-1).
@@ -21,10 +21,10 @@ adj_tile([X0,Y0], [X1,Y0]) :-
 
 solve(X, Y, Path) :-
 	endpoints_valid(X, Y, Path),
-	solve_rec(X, Y, Path),
-	\+ is_shorter_path(X, Y, Path).
+	valid_path(X, Y, Path),
+	\+ exists_shorter_path(X, Y, Path).
 
-is_shorter_path(X, Y, Path) :-
+exists_shorter_path(X, Y, Path) :-
 	solve_rec(X, Y, OPath),
 	length(OPath, N),
 	length(Path, M),
