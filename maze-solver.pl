@@ -4,10 +4,10 @@
 
 available_move([X0,Y0], [X1,Y1]) :- 
 	adj_tile([X0,Y0], [X1,Y1]), 
-	\+ available_tile(X0,Y0), 
-	\+ available_tile(X1,Y1).
+	available_tile(X0,Y0), 
+	available_tile(X1,Y1).
 
-available_tile([X0,Y0]) :- 
+available_tile(X0,Y0) :- 
 	\+ barrier(X0,Y0), 
 	\+ outside(X0,Y0).
 
@@ -25,12 +25,12 @@ adj_tile([X0,Y0], [X1,Y0]) :-
 
 solve(A, B, Path) :-
 	endpoints_valid(A, B, Path),
-	valid_path(Path),
+	path_valid(Path),
 	\+ exists_shorter_path(A, B, Path).
 
 exists_shorter_path(A, B, Path) :-
 	endpoints_valid(A, B, OPath),
-	valid_path(OPath),
+	path_valid(OPath),
 	length(OPath, N),
 	length(Path, M),
 	(N < M),
@@ -40,8 +40,8 @@ endpoints_valid(A, B, Path) :-
 	Path = [A|_],
 	last_element(Path, B).
 
-path_valid([C]) :-
-	available_tile(C).
+path_valid([[X,Y]]) :-
+	available_tile(X, Y).
 path_valid(Path) :-
 	Path = [C|T],
 	\+ is_in(C, T),
