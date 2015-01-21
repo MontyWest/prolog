@@ -21,3 +21,7 @@
 
 :- mazeSolver:endpoints_valid([2,3], [3,4], [[2,3],[3,3],[3,4]]).
 :- \+ mazeSolver:endpoints_valid([2,3], [3,4], [[5,6],[6,6],[6,7]]).
+
+:- mazeSolver:path_valid([[5,6],[6,6],[6,7]]).
+
+
