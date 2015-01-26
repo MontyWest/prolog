@@ -1,6 +1,7 @@
 :- module(mazeSolver, [solve/3]).
-:- use_module('maze-utils.pl', [last_element/2, is_in/2]).
 :- ensure_loaded(['maze.pl']).
+:- use_module('maze-utils.pl', [last_element/2, is_in/2]).
+:- use_module('grid-printer.pl', [printGrid/1]).
 
 available_move([X0,Y0], [X1,Y1]) :- 
 	adj_tile([X0,Y0], [X1,Y1]), 
@@ -25,7 +26,8 @@ adj_tile([X0,Y0], [X1,Y0]) :-
 
 solve(ST, ET, Path) :-
 	path_solver(ST, ET, [ET], Path),
-	\+ exists_shorter_path(ST, ET, Path).
+	%% \+ exists_shorter_path(ST, ET, Path),
+	printGrid(Path).
 
 %% Builds path backwards, path goes CurrentT -> ST
 path_solver(ST, ST, Path, Path).

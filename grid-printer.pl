@@ -1,4 +1,5 @@
-:- ensure_loaded(['maze.pl']).
+:- module(gridPrinter, [printGrid/1]).
+
 
 printGrid(Path) :-
 	mazeSize(Vert, Hori), nl,
@@ -24,7 +25,7 @@ printColumnHeader(To, To) :-
 	write(To).
 printColumnHeader(From, To) :-
 	write(From),
-	write(' '),
+	printHeadingInnerSpacer(From),
 	Next is From+1,
 	printColumnHeader(Next, To).
 
@@ -50,10 +51,15 @@ printInnerGrid(Row, RowTo, Columns, Path) :-
 	RowNext is Row+1,
 	printInnerGrid(RowNext, RowTo, Columns, Path).
 
+printHeadingInnerSpacer(Row) :-
+	Row > 9 ; write(' '),
+	true.
+
 printGridRow(Row, ColumnFrom, ColumnTo, Path) :-
 	printSpacerRow,
 	write(Row),
-	write(' |'),
+	printHeadingInnerSpacer(Row),
+	write('|'),
 	printGridRowInner(Row, ColumnFrom, ColumnTo, Path).
 
 printGridRowInner(Row, Column, Column, Path):-
