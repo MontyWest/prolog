@@ -4,7 +4,7 @@ printGrid(Path) :-
 	mazeSize(Vert, Hori), nl,
 	printHeader(1,Hori), nl,
 	printGridHorizEdge(1,Hori), nl,
-	printGridRow(1, 1, Hori, Path), nl,
+	printInnerGrid(1, Vert, Hori, Path), nl,
 	printGridHorizEdge(1,Hori).
 
 printSpacerTop :-
@@ -40,6 +40,15 @@ printGridHorizBorder(From, To) :-
 	write('--'),
 	Next is From+1,
 	printGridHorizBorder(Next, To).
+
+printInnerGrid(Row, Row, Columns, Path) :-
+	printGridRow(Row, 1, Columns, Path).
+
+printInnerGrid(Row, RowTo, Columns, Path) :-
+	printGridRow(Row, 1, Columns, Path),
+	nl,
+	RowNext is Row+1,
+	printInnerGrid(RowNext, RowTo, Columns, Path).
 
 printGridRow(Row, ColumnFrom, ColumnTo, Path) :-
 	printSpacerRow,
