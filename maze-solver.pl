@@ -25,7 +25,7 @@ adj_tile([X0,Y0], [X1,Y0]) :-
 
 solve(ST, ET, Path) :-
 	start_tile_valid(ST, Path),
-	path_solver(ST, ET, [ST], Path).
+	path_solver(ST, ET, [ET], Path).
 	%% \+ exists_shorter_path(A, B, Path).
 
 start_tile_valid(ST, Path) :-
@@ -33,10 +33,10 @@ start_tile_valid(ST, Path) :-
 
 %% Builds path backwards, path goes CurrentT -> ET
 path_solver(ET, ET, Path, Path).
-path_solver(CurrentT, ET, Cumu, Path) :-
+path_solver(ST, CurrentT, Cumu, Path) :-
 	available_move(CurrentT, D),
 	\+ is_in(D, Cumu),
-	path_solver(D, ET, [D|Cumu], Path).
+	path_solver(ST, D, [D|Cumu], Path).
 
 %% exists_shorter_path(A, B, Path) :-
 %% 	endpoints_valid(A, B, OPath),
