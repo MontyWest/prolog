@@ -19,9 +19,6 @@
 :- mazeSolver:adj_tile([4,3], [3,3]).
 :- \+ mazeSolver:adj_tile([2,1], [1,2]).
 
-:- mazeSolver:start_tile_valid([2,3], [[2,3],[3,3],[3,4]]).
-:- \+ mazeSolver:start_tile_valid([2,3], [[5,6],[6,6],[6,7]]).
-
 :- mazeSolver:solve([1,1],[2,3],[[1,1],[1,2],[1,3],[2,3]]).
 
 
