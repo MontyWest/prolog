@@ -25,8 +25,8 @@ adj_tile([X0,Y0], [X1,Y0]) :-
 
 solve(A, B, Path) :-
 	endpoints_valid(A, B, Path),
-	path_valid(Path),
-	\+ exists_shorter_path(A, B, Path).
+	path_valid(Path).
+	%% \+ exists_shorter_path(A, B, Path).
 
 exists_shorter_path(A, B, Path) :-
 	endpoints_valid(A, B, OPath),
@@ -44,10 +44,11 @@ path_valid([[X,Y]]) :-
 	available_tile(X, Y).
 path_valid(Path) :-
 	Path = [C|T],
-	\+ is_in(C, T),
 	T = [D|_],
 	available_move(C, D),
 	path_valid(T).
+
+
 
 
 
