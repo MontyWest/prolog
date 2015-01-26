@@ -32,8 +32,9 @@ start_tile_valid(ST, Path) :-
 	Path = [ST|_].
 
 path_solver(CurrentT, ET, Cumu, Path) :-
-	CurrentT = ET.
-	
+	CurrentT = ET,
+	Cumu = Path.
+
 path_solver(CurrentT, ET, Cumu, Path) :-
 	available_move(CurrentT, D),
 	\+ is_in(D, Cumu),
