@@ -33,7 +33,6 @@ adj_tile([X0,Y0], [X1,Y0]) :-
 solve(ST, ET, Path) :-
 	path_solver(ST, ET, [ET], Path),
 	%% \+ exists_shorter_path(ST, ET, Path),
-	!,
 	printGrid(Path).
 
 %% Builds path backwards, path goes CurrentT -> ST
