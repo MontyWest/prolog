@@ -24,6 +24,8 @@ printHeader(From, To) :-
 printColumnHeader(To, To) :-
 	write(To).
 printColumnHeader(From, To) :-
+	From>=To.
+printColumnHeader(From, To) :-
 	write(From),
 	printHeadingInnerSpacer(From),
 	Next is From+1,
@@ -38,13 +40,16 @@ printGridHorizEdge(From, To) :-
 printGridHorizBorder(To, To) :-
 	write('---').
 printGridHorizBorder(From, To) :-
+	From>=To.	
+printGridHorizBorder(From, To) :-
 	write('--'),
 	Next is From+1,
 	printGridHorizBorder(Next, To).
 
 printInnerGrid(Row, Row, Columns, Path) :-
 	printGridRow(Row, 1, Columns, Path).
-
+printInnerGrid(Row, RowTo, _, _) :-
+	Row>=RowTo.
 printInnerGrid(Row, RowTo, Columns, Path) :-
 	printGridRow(Row, 1, Columns, Path),
 	nl,
@@ -66,6 +71,8 @@ printGridRowInner(Row, Column, Column, Path):-
 	write(' '),
 	printSymbol(Row, Column, Path),
 	write(' |').
+printGridRowInner(_, Column, ColumnTo, _) :-
+	Column>=ColumnTo.
 printGridRowInner(Row, Column, ColumnTo, Path) :-
 	write(' '),
 	printSymbol(Row, Column, Path),
