@@ -17,11 +17,10 @@ barrier(2	,9).
 barrier(2	,16).
 barrier(2	,4).
 barrier(2	,2).
-barrier(2	,2).
-barrier(2	,7).
 barrier(2	,12).
 barrier(2	,13).
 barrier(2	,20).
+barrier(3	,7).
 barrier(3	,14).
 barrier(3	,15).
 barrier(3	,13).
@@ -34,14 +33,13 @@ barrier(3	,18).
 barrier(3	,19).
 barrier(4	,7).
 barrier(4	,8).
-barrier(4	,12).
 barrier(4	,3).
 barrier(4	,17).
 barrier(4	,11).
 barrier(4	,6).
 barrier(4	,21).
-barrier(4	,12).
 barrier(4	,17).
+barrier(5	,12).
 barrier(5	,2).
 barrier(5	,10).
 barrier(5	,20).
@@ -212,3 +210,65 @@ barrier(21,	12).
 barrier(21,	1).
 barrier(21,	4).
 barrier(21,	10).
+barrier(1, 11).
+barrier(1, 15).
+barrier(1, 18).
+barrier(4, 2).
+barrier(4, 5).
+barrier(4, 16).
+barrier(5, 14).
+barrier(8, 4).
+barrier(8, 18).
+barrier(9, 2).
+barrier(10, 5).
+barrier(10, 9).
+barrier(11, 20).
+barrier(12, 5).
+barrier(12, 6).
+barrier(12, 11).
+barrier(13, 3).
+barrier(13, 5).
+barrier(13, 11).
+barrier(14, 3).
+barrier(14, 5).
+barrier(14, 7).
+barrier(15, 7).
+barrier(16, 7).
+barrier(16, 10).
+barrier(16, 14).
+barrier(17, 3).
+barrier(17, 13).
+barrier(18, 6).
+barrier(18, 7).
+barrier(18, 16).
+barrier(19, 2).
+barrier(19, 17).
+barrier(19, 19).
+barrier(20, 7).
+barrier(20, 11).
+barrier(21, 9).
+
+ %%     1 2 3 4 5 6 7 8 9 101112131415161718192021
+ %%   +-------------------------------------------+
+ %% 1 | x x . x . x . x . . x x x . x . . x . . . |
+ %% 2 | . x . x . . . . x . . x x . . x . . . x . |
+ %% 3 | . . . . . x x . . x . . x x x x . x x . . |
+ %% 4 | . x x . x x x x . . x . . . . x x . . . x |
+ %% 5 | . x . . x . . x x x x x . x . . x x . x . |
+ %% 6 | . . . x . x x x . . . x . . . x . . x x x |
+ %% 7 | . x x . . x x . . x x . x x . . . . . x . |
+ %% 8 | . . . x . x . x . x x . . . x x . x . x . |
+ %% 9 | . x . . . . x . . . x . x . . . x . . x x |
+ %% 10| . x x x x . x . x . . . . x . x . . x . . |
+ %% 11| . x x . x . . . . . x . x x x . . x x x . |
+ %% 12| x . . . x x . x x . x . x x x x x . . . . |
+ %% 13| x x x . x . . . . . x . x x . . x x . x . |
+ %% 14| x . x . x . x . x x x . . . x . x x x . . |
+ %% 15| . . . . . . x . x x . x . x . x x . . . x |
+ %% 16| . x x . x . x . x x . . . x x x . . x x . |
+ %% 17| . . x x . . x x . . . x x . . . . x x x x |
+ %% 18| x . . . . x x . x . x . . . x x . . x x x |
+ %% 19| x x . x . . . . x . . x . x x x x . x x . |
+ %% 20| x x . x x x x . . . x x . x . x . . . . x |
+ %% 21| x x . x . . . . x x x x . . . . . x x . . |
+ %%   +-------------------------------------------+

@@ -16,6 +16,8 @@ inside_maze(X1,Y1) :-
 	Y1>=1, 
 	Y1=<B.
 
+available_tile([X,Y]) :-
+	available_tile(X,Y).
 available_tile(X0,Y0) :- 
 	inside_maze(X0,Y0),
 	\+ barrier(X0,Y0).
@@ -37,11 +39,14 @@ solve(ST, ET, Path) :-
 	%% \+ exists_shorter_path(ST, ET, Path),
 	printGrid(Path).
 
+
 %% Builds path backwards, path goes CurrentT -> ST
-path_solver(ST, ST, Path, Path).
+path_solver(ST, ST, Path, Path):-
+	!.
 path_solver(ST, CurrentT, Cumu, Path) :-
 	available_move(CurrentT, ST),
-	Path = [ST|Cumu].
+	Path = [ST|Cumu],
+	!.
 path_solver(ST, CurrentT, Cumu, Path) :-
 	available_move(CurrentT, D),
 	\+ memberchk(D, Cumu),
