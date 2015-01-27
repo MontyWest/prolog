@@ -36,7 +36,7 @@ solve(ST, ET, Path) :-
 	available_tile(ST),
 	available_tile(ET),
 	path_solver(ST, ET, [ET], Path),
-	%% \+ exists_shorter_path(ST, ET, Path),
+	\+ exists_shorter_path(ST, ET, Path),
 	printGrid(Path).
 
 
