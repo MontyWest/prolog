@@ -1,5 +1,4 @@
 :- module(gridPrinter, [printGrid/1]).
-:- use_module('maze-big.pl', [mazeSize/2, barrier/2]).
 
 printGrid(Path) :-
 	mazeSize(Vert, Hori), nl,
