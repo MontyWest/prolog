@@ -39,6 +39,8 @@ solve(ST, ET, Path) :-
 	printGrid(Path).
 
 
+
+
 %% Builds path backwards, path goes CurrentT -> ST
 path_solver(ST, ST, Path, Path):-
 	!.
@@ -58,5 +60,55 @@ exists_shorter_path(ST, ET, Path) :-
 	(N < M),
 	!.
 
+%%%%%% New %%%%%%
+solve_shortest_eff(ST, ET, Path) :-
+	available_tile(ST),
+	available_tile(ET),
+	mazeSize(N,M),
+	get_paths_list(ST, ET, N*M, [], PathList),
+	get_shortest_path(Path, PathList),
+	printGrid(Path).
+
+
+get_shortest_path(Path, PathList) :-
+	get_shortest_path_length(PathList, Min),
+	member(Path, PathList),
+	length(Path, Min).
+
+get_shortest_path_length(PathList, Min) :-
+	PathList = [H|T],
+	length(H, MinStart),
+	get_shortest_path_length(T, MinStart, Min).
+
+get_shortest_path_length([], Min, Min).
+get_shortest_path_length(PathList, LatestMin, Min) :-
+	PathList = [NewPath|T],
+	length(NewPath, N),
+	NewMin is min(N, LatestMin),
+	get_shortest_path_length(T, NewMin, Min).
+
+
+get_paths_list(ST, ET, MaxLength, Cumu, PathList) :-
+	path_solver_plus(ST, ET, MaxLength, [ET], Path),
+	length(Path, N),
+	N < MaxLength, %% redundant check assuming it works in the path solver
+	\+ memberchk(Path, Cumu),
+	get_paths_list(ST, ET, MaxLength, [Path|Cumu], PathList).
+get_paths_list(_, _, _, PathList, PathList). %% Order means this is only called when above rule fails.
+
+path_solver_plus(ST, ST, _, Path, Path):-
+	!.
+path_solver_plus(ST, CurrentT, MaxLength, Cumu, Path) :-
+	available_move(CurrentT, ST),
+	length(Cumu, N),
+	N < MaxLength,
+	Path = [ST|Cumu],
+	!.
+path_solver_plus(ST, CurrentT, MaxLength, Cumu, Path) :-
+	length(Cumu, N),
+	N < MaxLength,
+	available_move(CurrentT, D),
+	\+ memberchk(D, Cumu),
+	path_solver(ST, D, [D|Cumu], Path).
 
 
