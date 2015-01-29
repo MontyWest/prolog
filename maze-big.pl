@@ -235,7 +235,6 @@ barrier(14, 7).
 barrier(15, 7).
 barrier(16, 7).
 barrier(16, 10).
-barrier(16, 14).
 barrier(17, 3).
 barrier(17, 13).
 barrier(18, 6).
@@ -265,7 +264,7 @@ barrier(21, 9).
  %% 13| x x x . x . . . . . x . x x . . x x . x . |
  %% 14| x . x . x . x . x x x . . . x . x x x . . |
  %% 15| . . . . . . x . x x . x . x . x x . . . x |
- %% 16| . x x . x . x . x x . . . x x x . . x x . |
+ %% 16| . x x . x . x . x x . . . . x x . . x x . |
  %% 17| . . x x . . x x . . . x x . . . . x x x x |
  %% 18| x . . . . x x . x . x . . . x x . . x x x |
  %% 19| x x . x . . . . x . . x . x x x x . x x . |

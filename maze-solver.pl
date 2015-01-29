@@ -38,9 +38,6 @@ solve(ST, ET, Path) :-
 	\+ exists_shorter_path(ST, ET, Path),
 	printGrid(Path).
 
-
-
-
 %% Builds path backwards, path goes CurrentT -> ST
 path_solver(ST, ST, Path, Path):-
 	!.
@@ -60,50 +57,64 @@ exists_shorter_path(ST, ET, Path) :-
 	(N < M),
 	!.
 
+
+
 %%%%%% New %%%%%%
+
+%% Checks endpoints first, then gets list of paths, then choses from that list.
 solve_shortest_eff(ST, ET, Path) :-
 	available_tile(ST),
 	available_tile(ET),
 	mazeSize(N,M),
 	get_paths_list(ST, ET, N*M, [], PathList),
+	!,
 	get_shortest_path(Path, PathList),
 	printGrid(Path).
 
-
+%% Plucks a path from list, if its length is minimal then returns
 get_shortest_path(Path, PathList) :-
 	get_shortest_path_length(PathList, Min),
 	member(Path, PathList),
 	length(Path, Min).
 
+%% Gets the minimum of the lengths of paths in the list
 get_shortest_path_length(PathList, Min) :-
 	PathList = [H|T],
 	length(H, MinStart),
 	get_shortest_path_length(T, MinStart, Min).
 
+%% Recurses through the list, taking the minimum length that it finds as it goes
 get_shortest_path_length([], Min, Min).
 get_shortest_path_length(PathList, LatestMin, Min) :-
 	PathList = [NewPath|T],
 	length(NewPath, N),
-	NewMin is min(N, LatestMin),
+	NewMin is min(N, LatestMin), 
 	get_shortest_path_length(T, NewMin, Min).
 
-
+%% recursively finds paths that satisify, when all are found 
+%% this returns will false, and move to next rule.
 get_paths_list(ST, ET, MaxLength, Cumu, PathList) :-
 	path_solver_plus(ST, ET, MaxLength, [ET], Path),
 	length(Path, N),
 	N < MaxLength, %% redundant check assuming it works in the path solver
 	\+ memberchk(Path, Cumu),
 	get_paths_list(ST, ET, MaxLength, [Path|Cumu], PathList).
-get_paths_list(_, _, _, PathList, PathList). %% Order means this is only called when above rule fails.
+%% Order means this is only called when above rule fails.
+get_paths_list(_, _, _, PathList, PathList).
 
+%% Solves for path backwards (as it's easy to build list that way)
+%% When the current tile is the start tile then end.
 path_solver_plus(ST, ST, _, Path, Path):-
 	!.
+%% Sink effect on the start tile, if we are currently one tile away then move straight there.
 path_solver_plus(ST, CurrentT, MaxLength, Cumu, Path) :-
 	available_move(CurrentT, ST),
 	length(Cumu, N),
 	N < MaxLength,
 	Path = [ST|Cumu],
 	!.
+%% Finds an available move, if we haven't been there, add to the path and recurse
+%% If the current path being built gets bigger than max allowed length then not allowed
 path_solver_plus(ST, CurrentT, MaxLength, Cumu, Path) :-
 	length(Cumu, N),
 	N < MaxLength,
