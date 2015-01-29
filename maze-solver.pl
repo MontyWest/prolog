@@ -78,15 +78,13 @@ get_shortest_path(Path, PathList) :-
 	length(Path, Min).
 
 %% Gets the minimum of the lengths of paths in the list
-get_shortest_path_length(PathList, Min) :-
-	PathList = [H|T],
+get_shortest_path_length([H|T], Min) :-
 	length(H, MinStart),
 	get_shortest_path_length(T, MinStart, Min).
 
 %% Recurses through the list, taking the minimum length that it finds as it goes
 get_shortest_path_length([], Min, Min).
-get_shortest_path_length(PathList, LatestMin, Min) :-
-	PathList = [NewPath|T],
+get_shortest_path_length([NewPath|T], LatestMin, Min) :-
 	length(NewPath, N),
 	NewMin is min(N, LatestMin), 
 	get_shortest_path_length(T, NewMin, Min).
