@@ -13,10 +13,10 @@ barrier(1	,6).
 barrier(1	,12).
 barrier(1	,1).
 barrier(2	,20).
-barrier(2	,9).
 barrier(2	,16).
 barrier(2	,4).
 barrier(2	,2).
+barrier(2   ,9).
 barrier(2	,12).
 barrier(2	,13).
 barrier(2	,20).
@@ -29,13 +29,12 @@ barrier(3	,10).
 barrier(3	,13).
 barrier(3	,16).
 barrier(3	,18).
-barrier(3	,18).
 barrier(3	,19).
+barrier(3	,12).
 barrier(4	,7).
 barrier(4	,8).
 barrier(4	,3).
 barrier(4	,17).
-barrier(4	,11).
 barrier(4	,6).
 barrier(4	,21).
 barrier(4	,17).
@@ -45,8 +44,7 @@ barrier(5	,10).
 barrier(5	,20).
 barrier(5	,8).
 barrier(5	,5).
-barrier(5	,18).
-barrier(5	,18).
+barrier(5	,19).
 barrier(5	,9).
 barrier(5	,17).
 barrier(5	,11).
@@ -80,25 +78,20 @@ barrier(8	,8).
 barrier(8	,11).
 barrier(8	,16).
 barrier(8	,10).
-barrier(9	,17).
+barrier(9	,18).
 barrier(9	,20).
-barrier(9	,21).
-barrier(9	,21).
 barrier(9	,21).
 barrier(9	,11).
 barrier(9	,13).
 barrier(9	,7).
-barrier(9	,21).
-barrier(9	,21).
+barrier(9,	19).
 barrier(10,	14).
 barrier(10,	7).
 barrier(10,	2).
 barrier(10,	7).
-barrier(10,	19).
 barrier(10,	16).
 barrier(10,	4).
 barrier(10,	3).
-barrier(10,	19).
 barrier(10,	3).
 barrier(11,	5).
 barrier(11,	2).
@@ -253,12 +246,12 @@ barrier(21, 9).
  %% 2 | . x . x . . . . x . . x x . . x . . . x . |
  %% 3 | . . . . . x x . . x . . x x x x . x x . . |
  %% 4 | . x x . x x x x . . x . . . . x x . . . x |
- %% 5 | . x . . x . . x x x x x . x . . x x . x . |
+ %% 5 | . x . . x . . x x x x x . x . . x . x x . |
  %% 6 | . . . x . x x x . . . x . . . x . . x x x |
  %% 7 | . x x . . x x . . x x . x x . . . . . x . |
  %% 8 | . . . x . x . x . x x . . . x x . x . x . |
- %% 9 | . x . . . . x . . . x . x . . . x . . x x |
- %% 10| . x x x x . x . x . . . . x . x . . x . . |
+ %% 9 | . x . . . . x . . . x . x . . . . x x x x |
+ %% 10| . x x x x . x . x . . . . x . x . . . . . |
  %% 11| . x x . x . . . . . x . x x x . . x x x . |
  %% 12| x . . . x x . x x . x . x x x x x . . . . |
  %% 13| x x x . x . . . . . x . x x . . x x . x . |
