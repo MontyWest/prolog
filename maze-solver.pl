@@ -5,7 +5,7 @@
 
 available_move([X0,Y0], [X1,Y1]) :- 
 	adj_tile([X0,Y0], [X1,Y1]), 
-	available_tile(X0,Y0), 
+	%% available_tile(X0,Y0), 
 	available_tile(X1,Y1).
 
 inside_maze(X1,Y1) :- 
@@ -67,9 +67,9 @@ get_shortest_path_length([NewPath|T], LatestMin, Min) :-
 get_paths_list(ST, ET, MaxLength, Cumu, PathList) :-
 	path_solver_plus(ST, ET, MaxLength, [ET], Path),
 	length(Path, N),
-	N < MaxLength, %% redundant check assuming it works in the path solver
+	N =< MaxLength, %% redundant check assuming it works in the path solver
 	\+ memberchk(Path, Cumu),
-	get_paths_list(ST, ET, MaxLength, [Path|Cumu], PathList).
+	get_paths_list(ST, ET, N, [Path|Cumu], PathList).
 %% Order means this is only called when above rule fails.
 get_paths_list(_, _, _, PathList, PathList).
 

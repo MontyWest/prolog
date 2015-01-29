@@ -8,7 +8,6 @@ barrier(1	,4).
 barrier(1	,8).
 barrier(1	,6).
 barrier(1	,2).
-barrier(1	,13).
 barrier(1	,6).
 barrier(1	,12).
 barrier(1	,1).
@@ -18,7 +17,6 @@ barrier(2	,4).
 barrier(2	,2).
 barrier(2   ,9).
 barrier(2	,12).
-barrier(2	,13).
 barrier(2	,20).
 barrier(3	,7).
 barrier(3	,14).
@@ -242,8 +240,8 @@ barrier(21, 9).
 
  %%     1 2 3 4 5 6 7 8 9 101112131415161718192021
  %%   +-------------------------------------------+
- %% 1 | x x . x . x . x . . x x x . x . . x . . . |
- %% 2 | . x . x . . . . x . . x x . . x . . . x . |
+ %% 1 | x x . x . x . x . . x x . . x . . x . . . |
+ %% 2 | . x . x . . . . x . . x . . . x . . . x . |
  %% 3 | . . . . . x x . . x . . x x x x . x x . . |
  %% 4 | . x x . x x x x . . x . . . . x x . . . x |
  %% 5 | . x . . x . . x x x x x . x . . x . x x . |
