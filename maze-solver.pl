@@ -1,6 +1,6 @@
 :- module(mazeSolver, [solve/3]).
 :- use_module('maze-utils.pl', [last_element/2, is_in/2]).
-%% :- use_module('grid-printer.pl', [printGrid/1]).
+:- use_module('grid-printer.pl', [printGrid/1]).
 
 
 available_move([X0,Y0], [X1,Y1]) :- 

@@ -1,5 +1,7 @@
-:- module(gridPrinter, [printGrid/1]).
+:- module(gridPrinter, [printGrid/0, printGrid/1]).
 
+printGrid() :-
+	printGrid([]).
 printGrid(Path) :-
 	mazeSize(Vert, Hori), nl,
 	printHeader(1,Hori), nl,
