@@ -7,6 +7,6 @@
 
 :- use_module('maze-big.pl', [mazeSize/2, barrier/2]).
 %% :- use_module('maze.pl', [mazeSize/2, barrier/2]).
-:- use_module('grid-printer.pl', [printGrid/1]).
+:- use_module('maze-printer.pl', [printMaze/1]).
 :- use_module('maze-solver.pl', [solve/3]).
 

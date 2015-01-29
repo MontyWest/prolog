@@ -1,13 +1,13 @@
-:- module(gridPrinter, [printGrid/0, printGrid/1]).
+:- module(mazePrinter, [printMaze/0, printMaze/1]).
 
-printGrid() :-
-	printGrid([]).
-printGrid(Path) :-
+printMaze :-
+	printMaze([]).
+printMaze(Path) :-
 	mazeSize(Vert, Hori), nl,
 	printHeader(1,Hori), nl,
-	printGridHorizEdge(1,Hori), nl,
-	printInnerGrid(1, Vert, Hori, Path), nl,
-	printGridHorizEdge(1,Hori).
+	printMazeHorizEdge(1,Hori), nl,
+	printInnerMaze(1, Vert, Hori, Path), nl,
+	printMazeHorizEdge(1,Hori).
 
 printSpacerTop :-
 	write('     '). %%5
@@ -33,55 +33,55 @@ printColumnHeader(From, To) :-
 	printColumnHeader(Next, To),
 	!.
 
-printGridHorizEdge(From, To) :-
+printMazeHorizEdge(From, To) :-
 	printSpacerCorner,
 	write('+'),
-	printGridHorizBorder(From, To),
+	printMazeHorizBorder(From, To),
 	write('+').
 
-printGridHorizBorder(To, To) :-
+printMazeHorizBorder(To, To) :-
 	write('---').
-printGridHorizBorder(From, To) :-
+printMazeHorizBorder(From, To) :-
 	From>=To.	
-printGridHorizBorder(From, To) :-
+printMazeHorizBorder(From, To) :-
 	write('--'),
 	Next is From+1,
-	printGridHorizBorder(Next, To),
+	printMazeHorizBorder(Next, To),
 	!.
 
-printInnerGrid(Row, Row, Columns, Path) :-
-	printGridRow(Row, 1, Columns, Path).
-printInnerGrid(Row, RowTo, _, _) :-
+printInnerMaze(Row, Row, Columns, Path) :-
+	printMazeRow(Row, 1, Columns, Path).
+printInnerMaze(Row, RowTo, _, _) :-
 	Row>=RowTo.
-printInnerGrid(Row, RowTo, Columns, Path) :-
-	printGridRow(Row, 1, Columns, Path),
+printInnerMaze(Row, RowTo, Columns, Path) :-
+	printMazeRow(Row, 1, Columns, Path),
 	nl,
 	RowNext is Row+1,
-	printInnerGrid(RowNext, RowTo, Columns, Path),
+	printInnerMaze(RowNext, RowTo, Columns, Path),
 	!.
 
 printHeadingInnerSpacer(Row) :-
 	Row > 9 ; write(' '),
 	true.
 
-printGridRow(Row, ColumnFrom, ColumnTo, Path) :-
+printMazeRow(Row, ColumnFrom, ColumnTo, Path) :-
 	printSpacerRow,
 	write(Row),
 	printHeadingInnerSpacer(Row),
 	write('|'),
-	printGridRowInner(Row, ColumnFrom, ColumnTo, Path).
+	printMazeRowInner(Row, ColumnFrom, ColumnTo, Path).
 
-printGridRowInner(Row, Column, Column, Path):-
+printMazeRowInner(Row, Column, Column, Path):-
 	write(' '),
 	printSymbol(Row, Column, Path),
 	write(' |').
-printGridRowInner(_, Column, ColumnTo, _) :-
+printMazeRowInner(_, Column, ColumnTo, _) :-
 	Column>=ColumnTo.
-printGridRowInner(Row, Column, ColumnTo, Path) :-
+printMazeRowInner(Row, Column, ColumnTo, Path) :-
 	write(' '),
 	printSymbol(Row, Column, Path),
 	NextColumn is Column+1,
-	printGridRowInner(Row, NextColumn, ColumnTo, Path)
+	printMazeRowInner(Row, NextColumn, ColumnTo, Path)
 	,!.
 
 printSymbol(Row, Column, Path) :-

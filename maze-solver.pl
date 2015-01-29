@@ -1,6 +1,6 @@
 :- module(mazeSolver, [solve/3]).
 :- use_module('maze-utils.pl', [last_element/2, is_in/2]).
-:- use_module('grid-printer.pl', [printGrid/1]).
+:- use_module('maze-printer.pl', [printMaze/0, printMaze/1]).
 
 
 available_move([X0,Y0], [X1,Y1]) :- 
@@ -42,7 +42,7 @@ solve(ST, ET, Path) :-
 	get_paths_list(ST, ET, N*M, [], PathList),
 	!,
 	get_shortest_path(Path, PathList),
-	printGrid(Path).
+	printMaze(Path).
 
 %% Plucks a path from list, if its length is minimal then returns
 get_shortest_path(Path, PathList) :-
@@ -103,7 +103,7 @@ path_solver_plus(ST, CurrentT, MaxLength, Cumu, Path) :-
 %% 	available_tile(ET),
 %% 	path_solver(ST, ET, [ET], Path),
 %% 	\+ exists_shorter_path(ST, ET, Path),
-%% 	printGrid(Path).
+%% 	printMaze(Path).
 
 %% %% Builds path backwards, path goes CurrentT -> ST
 %% path_solver(ST, ST, Path, Path):-
