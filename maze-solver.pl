@@ -31,38 +31,11 @@ adj_tile([X0,Y0], [X0,Y1]) :-
 adj_tile([X0,Y0], [X1,Y0]) :- 
 	(X1 is X0+1).
 
-solve(ST, ET, Path) :-
-	available_tile(ST),
-	available_tile(ET),
-	path_solver(ST, ET, [ET], Path),
-	\+ exists_shorter_path(ST, ET, Path),
-	printGrid(Path).
-
-%% Builds path backwards, path goes CurrentT -> ST
-path_solver(ST, ST, Path, Path):-
-	!.
-path_solver(ST, CurrentT, Cumu, Path) :-
-	available_move(CurrentT, ST),
-	Path = [ST|Cumu],
-	!.
-path_solver(ST, CurrentT, Cumu, Path) :-
-	available_move(CurrentT, D),
-	\+ memberchk(D, Cumu),
-	path_solver(ST, D, [D|Cumu], Path).
-
-exists_shorter_path(ST, ET, Path) :-
-	path_solver(ST, ET, [ET], OPath),
-	length(OPath, N),
-	length(Path, M),
-	(N < M),
-	!.
-
-
 
 %%%%%% New %%%%%%
 
 %% Checks endpoints first, then gets list of paths, then choses from that list.
-solve_shortest_eff(ST, ET, Path) :-
+solve(ST, ET, Path) :-
 	available_tile(ST),
 	available_tile(ET),
 	mazeSize(N,M),
@@ -118,6 +91,35 @@ path_solver_plus(ST, CurrentT, MaxLength, Cumu, Path) :-
 	N < MaxLength,
 	available_move(CurrentT, D),
 	\+ memberchk(D, Cumu),
-	path_solver(ST, D, [D|Cumu], Path).
+	path_solver_plus(ST, D, MaxLength, [D|Cumu], Path).
 
 
+
+
+%% OLDER LESS EFFICIENT %%
+
+%% solve(ST, ET, Path) :-
+%% 	available_tile(ST),
+%% 	available_tile(ET),
+%% 	path_solver(ST, ET, [ET], Path),
+%% 	\+ exists_shorter_path(ST, ET, Path),
+%% 	printGrid(Path).
+
+%% %% Builds path backwards, path goes CurrentT -> ST
+%% path_solver(ST, ST, Path, Path):-
+%% 	!.
+%% path_solver(ST, CurrentT, Cumu, Path) :-
+%% 	available_move(CurrentT, ST),
+%% 	Path = [ST|Cumu],
+%% 	!.
+%% path_solver(ST, CurrentT, Cumu, Path) :-
+%% 	available_move(CurrentT, D),
+%% 	\+ memberchk(D, Cumu),
+%% 	path_solver(ST, D, [D|Cumu], Path).
+
+%% exists_shorter_path(ST, ET, Path) :-
+%% 	path_solver(ST, ET, [ET], OPath),
+%% 	length(OPath, N),
+%% 	length(Path, M),
+%% 	(N < M),
+%% 	!.
