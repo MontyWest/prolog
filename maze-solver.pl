@@ -69,7 +69,7 @@ get_paths_list(ST, ET, MaxLength, Cumu, PathList) :-
 	length(Path, N),
 	N < MaxLength, %% redundant check assuming it works in the path solver
 	\+ memberchk(Path, Cumu),
-	get_paths_list(ST, ET, N, [Path|Cumu], PathList).
+	get_paths_list(ST, ET, MaxLength, [Path|Cumu], PathList).
 %% Order means this is only called when above rule fails.
 get_paths_list(_, _, _, PathList, PathList).
 
