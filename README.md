@@ -9,10 +9,10 @@ Monty West - mwest06
 ### Running:
 - Clone repo and move to directory
 - Run
-	```
-	$ swipl
-	> ['load']
-	```
+```
+$ swipl
+> ['load']
+```
 - You can now use:
 	```
 	%%Prints the maze
