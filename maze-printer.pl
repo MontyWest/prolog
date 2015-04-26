@@ -1,92 +1,105 @@
-:- module(mazePrinter, [printMaze/0, printMaze/1]).
+:- module(mazePrinter, [print_maze/0, print_maze/1]).
 
-printMaze :-
-	printMaze([]).
-printMaze(Path) :-
-	mazeSize(Vert, Hori), nl,
-	printHeader(1,Hori), nl,
-	printMazeHorizEdge(1,Hori), nl,
-	printInnerMaze(1, Vert, Hori, Path), nl,
-	printMazeHorizEdge(1,Hori).
+print_maze :-
+	print_maze([]).
+print_maze(Path) :-
+	maze_size(Vert, Hori), nl,
+	print_header(1,Hori), nl,
+	print_maze_horiz_edge(1,Hori), nl,
+	print_inner_maze(1, Vert, Hori, Path), nl,
+	print_maze_horiz_edge(1,Hori).
 
-printSpacerTop :-
+print_spacer_top :-
 	write('     '). %%5
 
-printSpacerCorner :-
+print_spacer_corner :-
 	write('   '). %%3
 
-printSpacerRow :-
+print_spacer_row :-
 	write(' '). %%1
 
-printHeader(From, To) :-
-	printSpacerTop,
-	printColumnHeader(From, To).
+print_header(From, To) :-
+	print_spacer_top,
+	print_column_header(From, To).
 
-printColumnHeader(To, To) :-
+%% Prints column header until false, hence the need for the cut
+%% which prevents back tracking after header is printed
+print_column_header(To, To) :-
 	write(To).
-printColumnHeader(From, To) :-
+print_column_header(From, To) :-
 	From>=To.
-printColumnHeader(From, To) :-
+print_column_header(From, To) :-
 	write(From),
-	printHeadingInnerSpacer(From),
+	print_heading_inner_spacer(From),
 	Next is From+1,
-	printColumnHeader(Next, To),
+	print_column_header(Next, To),
 	!.
 
-printMazeHorizEdge(From, To) :-
-	printSpacerCorner,
+print_maze_horiz_edge(From, To) :-
+	print_spacer_corner,
 	write('+'),
-	printMazeHorizBorder(From, To),
+	print_maze_horiz_border(From, To),
 	write('+').
 
-printMazeHorizBorder(To, To) :-
+%% Prints top/bottom border until false, hence the need for the cut
+%% which prevents back tracking after border is printed
+print_maze_horiz_border(To, To) :-
 	write('---').
-printMazeHorizBorder(From, To) :-
+print_maze_horiz_border(From, To) :-
 	From>=To.	
-printMazeHorizBorder(From, To) :-
+print_maze_horiz_border(From, To) :-
 	write('--'),
 	Next is From+1,
-	printMazeHorizBorder(Next, To),
+	print_maze_horiz_border(Next, To),
 	!.
 
-printInnerMaze(Row, Row, Columns, Path) :-
-	printMazeRow(Row, 1, Columns, Path).
-printInnerMaze(Row, RowTo, _, _) :-
+%% Prints the inside of the maze (below top border, above bottom border)
+%% Cut prevents back tracking when mze is printed
+print_inner_maze(Row, Row, Columns, Path) :-
+	print_maze_row(Row, 1, Columns, Path).
+print_inner_maze(Row, RowTo, _, _) :-
 	Row>=RowTo.
-printInnerMaze(Row, RowTo, Columns, Path) :-
-	printMazeRow(Row, 1, Columns, Path),
+print_inner_maze(Row, RowTo, Columns, Path) :-
+	print_maze_row(Row, 1, Columns, Path),
 	nl,
 	RowNext is Row+1,
-	printInnerMaze(RowNext, RowTo, Columns, Path),
+	print_inner_maze(RowNext, RowTo, Columns, Path),
 	!.
 
-printHeadingInnerSpacer(Row) :-
+print_heading_inner_spacer(Row) :-
 	Row > 9 ; write(' '),
 	true.
 
-printMazeRow(Row, ColumnFrom, ColumnTo, Path) :-
-	printSpacerRow,
+print_maze_row(Row, ColumnFrom, ColumnTo, Path) :-
+	print_spacer_row,
 	write(Row),
-	printHeadingInnerSpacer(Row),
+	print_heading_inner_spacer(Row),
 	write('|'),
-	printMazeRowInner(Row, ColumnFrom, ColumnTo, Path).
+	print_maze_row_inner(Row, ColumnFrom, ColumnTo, Path).
 
-printMazeRowInner(Row, Column, Column, Path):-
+%% Prints a row of the inner maze, stops when it reachs maze size
+%% Cute prevents backtracking after row is printed
+print_maze_row_inner(Row, Column, Column, Path):-
 	write(' '),
-	printSymbol(Row, Column, Path),
+	print_symbol(Row, Column, Path),
 	write(' |').
-printMazeRowInner(_, Column, ColumnTo, _) :-
+print_maze_row_inner(_, Column, ColumnTo, _) :-
 	Column>=ColumnTo.
-printMazeRowInner(Row, Column, ColumnTo, Path) :-
+print_maze_row_inner(Row, Column, ColumnTo, Path) :-
 	write(' '),
-	printSymbol(Row, Column, Path),
+	print_symbol(Row, Column, Path),
 	NextColumn is Column+1,
-	printMazeRowInner(Row, NextColumn, ColumnTo, Path)
-	,!.
+	print_maze_row_inner(Row, NextColumn, ColumnTo, Path),
+	!.
 
-printSymbol(Row, Column, Path) :-
-	memberchk([Row,Column], Path), write('o');
-	barrier(Row, Column), write('x');
+%% Prints 'o' for tile in the path
+%% Prints 'x' for a barrier
+%% Prints '.' otherwise
+print_symbol(Row, Column, Path) :-
+	memberchk([Row,Column], Path), write('o').
+print_symbol(Row, Column, _) :-
+	barrier(Row, Column), write('x').
+print_symbol(_, _, _) :-
 	write('.').
 
 

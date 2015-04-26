@@ -1,6 +1,7 @@
-:- module(maze, [mazeSize/2, barrier/2]).
+:- module(maze, [maze_size/2, barrier/2]).
 
-mazeSize(5, 9).
+maze_size(5, 9).
+
 barrier(1, 8).
 barrier(2, 1).
 barrier(2, 2).
