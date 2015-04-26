@@ -25,7 +25,7 @@ $ swipl
 
 ### Changing maze:
 - In **load.pl** you can change the maze by commenting/uncommenting the maze lines, it is currently set to **maze-big.pl**.
-- You can also make your own maze file. Simply declare maze_size/2 and barrier/2 e.g.
+- You can also make your own maze file. Simply declare *maze_size/2* and *barrier/2* e.g.
  	```
  	:- module(myMaze, [maze_size/2, barrier/2]).
  	maze_size(3, 3).
